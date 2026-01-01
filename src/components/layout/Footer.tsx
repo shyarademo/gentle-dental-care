@@ -5,7 +5,6 @@ const quickLinks = [
   { href: "/about", label: "About Dr. Mitchell" },
   { href: "/services", label: "Our Services" },
   { href: "/reviews", label: "Patient Reviews" },
-  { href: "/clinic", label: "Clinic Info" },
   { href: "/contact", label: "Book Appointment" },
 ];
 
