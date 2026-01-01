@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -79,6 +80,7 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeSwitcher />
             <a
               href="tel:+1234567890"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -127,7 +129,8 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <div className="pt-3 px-4">
+            <div className="pt-3 px-4 flex items-center gap-3">
+              <ThemeSwitcher />
               <Button asChild className="w-full rounded-full">
                 <Link to="/contact">Book Appointment</Link>
               </Button>
