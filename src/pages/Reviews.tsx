@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 import { reviews, treatmentTypes } from "@/data/reviews";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,65 +26,113 @@ export default function Reviews() {
     <Layout>
       <section className="section-padding" style={{ background: "var(--gradient-hero)" }}>
         <div className="container-wide text-center">
-          <h1 className="font-display text-4xl md:text-5xl font-semibold mb-4">Patient Reviews</h1>
-          <div className="flex items-center justify-center gap-2 mb-2">
-            {[1,2,3,4,5].map(i => <Star key={i} className="w-6 h-6 fill-warning text-warning" />)}
-          </div>
-          <p className="text-2xl font-semibold">{avgRating} out of 5</p>
-          <p className="text-muted-foreground">Based on {reviews.length} reviews</p>
+          <AnimateOnScroll animation="fade-up">
+            <h1 className="font-display text-4xl md:text-5xl font-semibold mb-4">Patient Reviews</h1>
+          </AnimateOnScroll>
+          <AnimateOnScroll animation="scale" delay={100}>
+            <div className="flex items-center justify-center gap-2 mb-2">
+              {[1,2,3,4,5].map(i => <Star key={i} className="w-6 h-6 fill-warning text-warning" />)}
+            </div>
+          </AnimateOnScroll>
+          <AnimateOnScroll animation="fade-up" delay={200}>
+            <p className="text-2xl font-semibold">{avgRating} out of 5</p>
+            <p className="text-muted-foreground">Based on {reviews.length} reviews</p>
+          </AnimateOnScroll>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-wide">
-          <div className="flex flex-wrap gap-4 mb-8">
-            <Button variant={filter === "all" ? "default" : "outline"} onClick={() => setFilter("all")}>All</Button>
-            {treatmentTypes.slice(0, 5).map(t => (
-              <Button key={t} variant={filter === t ? "default" : "outline"} onClick={() => setFilter(t)}>{t}</Button>
-            ))}
-          </div>
+          <AnimateOnScroll animation="fade-up">
+            <div className="flex flex-wrap gap-4 mb-8">
+              <Button 
+                variant={filter === "all" ? "default" : "outline"} 
+                onClick={() => setFilter("all")}
+                className="btn-hover-scale"
+              >
+                All
+              </Button>
+              {treatmentTypes.slice(0, 5).map(t => (
+                <Button 
+                  key={t} 
+                  variant={filter === t ? "default" : "outline"} 
+                  onClick={() => setFilter(t)}
+                  className="btn-hover-scale"
+                >
+                  {t}
+                </Button>
+              ))}
+            </div>
+          </AnimateOnScroll>
 
           <div className="grid md:grid-cols-2 gap-6 mb-16">
-            {filteredReviews.map(review => (
-              <div key={review.id} className="glass-card p-6 rounded-2xl">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <Star key={i} className={`w-4 h-4 ${i <= review.rating ? "fill-warning text-warning" : "text-muted"}`} />)}
-                </div>
-                <p className="text-foreground mb-4">"{review.review}"</p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold">{review.name}</p>
-                    <p className="text-sm text-muted-foreground">{review.treatment}</p>
+            {filteredReviews.map((review, index) => (
+              <AnimateOnScroll key={review.id} animation="fade-up" delay={index * 50}>
+                <div className="glass-card p-6 rounded-2xl h-full">
+                  <div className="flex items-center gap-1 mb-3">
+                    {[1,2,3,4,5].map(i => (
+                      <Star 
+                        key={i} 
+                        className={`w-4 h-4 transition-all duration-200 ${i <= review.rating ? "fill-warning text-warning" : "text-muted"}`} 
+                      />
+                    ))}
                   </div>
-                  {review.verified && <span className="flex items-center gap-1 text-xs text-success"><CheckCircle className="w-3 h-3" /> Verified</span>}
+                  <p className="text-foreground mb-4">"{review.review}"</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold">{review.name}</p>
+                      <p className="text-sm text-muted-foreground">{review.treatment}</p>
+                    </div>
+                    {review.verified && (
+                      <span className="flex items-center gap-1 text-xs text-success">
+                        <CheckCircle className="w-3 h-3" /> Verified
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </AnimateOnScroll>
             ))}
           </div>
 
           {/* Submit Review Form */}
-          <div className="max-w-2xl mx-auto glass-card p-8 rounded-3xl">
-            <h2 className="font-display text-2xl font-semibold mb-6 text-center">Share Your Experience</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input placeholder="Your Name (optional)" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-              <Select value={formData.treatment} onValueChange={v => setFormData({...formData, treatment: v})}>
-                <SelectTrigger><SelectValue placeholder="Treatment received" /></SelectTrigger>
-                <SelectContent>{treatmentTypes.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent>
-              </Select>
-              <div>
-                <label className="text-sm font-medium mb-2 block">Rating</label>
-                <div className="flex gap-1">
-                  {[1,2,3,4,5].map(i => (
-                    <button key={i} type="button" onClick={() => setFormData({...formData, rating: i})}>
-                      <Star className={`w-8 h-8 ${i <= formData.rating ? "fill-warning text-warning" : "text-muted"}`} />
-                    </button>
-                  ))}
+          <AnimateOnScroll animation="fade-up">
+            <div className="max-w-2xl mx-auto glass-card p-8 rounded-3xl">
+              <h2 className="font-display text-2xl font-semibold mb-6 text-center">Share Your Experience</h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <Input 
+                  placeholder="Your Name (optional)" 
+                  value={formData.name} 
+                  onChange={e => setFormData({...formData, name: e.target.value})} 
+                />
+                <Select value={formData.treatment} onValueChange={v => setFormData({...formData, treatment: v})}>
+                  <SelectTrigger><SelectValue placeholder="Treatment received" /></SelectTrigger>
+                  <SelectContent>{treatmentTypes.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent>
+                </Select>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Rating</label>
+                  <div className="flex gap-1">
+                    {[1,2,3,4,5].map(i => (
+                      <button 
+                        key={i} 
+                        type="button" 
+                        onClick={() => setFormData({...formData, rating: i})}
+                        className="transition-transform duration-150 hover:scale-110 active:scale-95"
+                      >
+                        <Star className={`w-8 h-8 transition-colors duration-200 ${i <= formData.rating ? "fill-warning text-warning" : "text-muted hover:text-warning/50"}`} />
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <Textarea placeholder="Your review..." value={formData.review} onChange={e => setFormData({...formData, review: e.target.value})} rows={4} />
-              <Button type="submit" className="w-full">Submit Review</Button>
-            </form>
-          </div>
+                <Textarea 
+                  placeholder="Your review..." 
+                  value={formData.review} 
+                  onChange={e => setFormData({...formData, review: e.target.value})} 
+                  rows={4} 
+                />
+                <Button type="submit" className="w-full btn-hover-scale">Submit Review</Button>
+              </form>
+            </div>
+          </AnimateOnScroll>
         </div>
       </section>
     </Layout>

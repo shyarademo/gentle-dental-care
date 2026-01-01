@@ -15,53 +15,68 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-5rem)] py-16 lg:py-24">
           {/* Content */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 animate-fade-in">
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in"
+              style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+            >
               <Star className="w-4 h-4 fill-primary" />
               <span>Beverly Hills' Trusted Dental Practice</span>
             </div>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-foreground leading-tight mb-6 animate-fade-in-up">
+            <h1 
+              className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-foreground leading-tight mb-6 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+            >
               Your Smile,{" "}
               <span className="gradient-text">Our Passion</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up animation-delay-100">
+            <p 
+              className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+            >
               Experience world-class dental care with Dr. Sarah Mitchell. 
               Over 15 years of expertise in cosmetic and family dentistry, 
               dedicated to creating beautiful, healthy smiles.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 animate-fade-in-up animation-delay-200">
-              <Button asChild size="lg" className="rounded-full px-8 gap-2">
+            <div 
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
+            >
+              <Button asChild size="lg" className="rounded-full px-8 gap-2 btn-hover-scale">
                 <Link to="/contact">
                   Book Your Consultation
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full px-8">
+              <Button asChild variant="outline" size="lg" className="rounded-full px-8 btn-hover-scale">
                 <Link to="/reviews">Read Patient Reviews</Link>
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 animate-fade-in-up animation-delay-300">
-              <div className="text-center lg:text-left">
+            <div 
+              className="grid grid-cols-3 gap-6 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: "500ms", animationFillMode: "forwards" }}
+            >
+              <div className="text-center lg:text-left group">
                 <div className="flex items-center justify-center lg:justify-start gap-2 text-primary mb-1">
-                  <Clock className="w-5 h-5" />
+                  <Clock className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                   <span className="font-display text-2xl font-bold">15+</span>
                 </div>
                 <p className="text-sm text-muted-foreground">Years Experience</p>
               </div>
-              <div className="text-center lg:text-left">
+              <div className="text-center lg:text-left group">
                 <div className="flex items-center justify-center lg:justify-start gap-2 text-primary mb-1">
-                  <Users className="w-5 h-5" />
+                  <Users className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                   <span className="font-display text-2xl font-bold">5,000+</span>
                 </div>
                 <p className="text-sm text-muted-foreground">Happy Patients</p>
               </div>
-              <div className="text-center lg:text-left">
+              <div className="text-center lg:text-left group">
                 <div className="flex items-center justify-center lg:justify-start gap-2 text-primary mb-1">
-                  <Award className="w-5 h-5" />
+                  <Award className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                   <span className="font-display text-2xl font-bold">20+</span>
                 </div>
                 <p className="text-sm text-muted-foreground">Awards Won</p>
@@ -70,12 +85,15 @@ export function HeroSection() {
           </div>
 
           {/* Image/Visual */}
-          <div className="relative hidden lg:block animate-fade-in animation-delay-200">
+          <div 
+            className="relative hidden lg:block opacity-0 animate-fade-in"
+            style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+          >
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 shadow-card">
               {/* Placeholder for dentist image */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-transform duration-500 hover:scale-105">
                     <span className="font-display text-5xl font-bold text-primary">SM</span>
                   </div>
                   <p className="text-muted-foreground">Dr. Sarah Mitchell</p>
@@ -84,7 +102,10 @@ export function HeroSection() {
               </div>
 
               {/* Floating Cards */}
-              <div className="absolute bottom-8 left-4 right-4 glass-card rounded-2xl p-4">
+              <div 
+                className="absolute bottom-8 left-4 right-4 glass-card rounded-2xl p-4 opacity-0 animate-slide-up"
+                style={{ animationDelay: "600ms", animationFillMode: "forwards" }}
+              >
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
